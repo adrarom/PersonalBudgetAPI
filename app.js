@@ -4,8 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const connectDB = require('./config/database');
-const indexRouter = require('./routes/index');
-const envelopesRouter = require('./routes/envelopeRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config();

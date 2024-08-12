@@ -1,12 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const { protect } = require('../middleware/authMiddleware')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
-});
-router.post("/",(req, res) =>{
-   const newEnvelope = req.body();
-});
+router.post('/', protect, createEnvelope);
+
+router.get('/', protect, getEnvelopes);
+
+router.get('/:id', protect, getEnvelopeById);
+
+router.put('/:id', protect, updateEnvelope);
+
+router.delete('/:id', protect, deleteEnvelope);
+
+module.exports = router;
 
 module.exports = router;
