@@ -1,21 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { createEnvelope, getUserEnvelopes, getEnvelopeById, updateEnvelope, deleteEnvelope } = require('../controllers/envelopeController');
+const transactionController = require('../controllers/transactionsController');
 const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @swagger
  * tags:
- *   name: Envelopes
- *   description: Operaciones relacionadas con sobres
+ *   name: Transactions
+ *   description: Operaciones relacionadas con transacciones
  */
 
 /**
  * @swagger
- * /api/envelopes:
+ * /api/transactions:
  *   post:
- *     summary: Crear un nuevo sobre
- *     tags: [Envelopes]
+ *     summary: Crear una nueva transacción
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -25,63 +25,49 @@ const { protect } = require('../middleware/authMiddleware');
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               envelopeId:
  *                 type: string
- *               budget:
+ *               amount:
  *                 type: number
+ *               description:
+ *                 type: string
  *     responses:
  *       201:
- *         description: Sobre creado exitosamente
+ *         description: Transacción creada exitosamente
  *       400:
  *         description: Error en la solicitud
  */
-router.post('/api/envelopes', protect, createEnvelope);
+router.post('/', protect, transactionController.createTransaction);
 
 /**
  * @swagger
- * /api/envelopes:
+ * /api/transactions/envelope/{envelopeId}:
  *   get:
- *     summary: Obtener todos los sobres del usuario
- *     tags: [Envelopes]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de sobres obtenida exitosamente
- *       401:
- *         description: No autorizado
- */
-router.get('/api/envelopes', protect, getUserEnvelopes);
-
-/**
- * @swagger
- * /api/envelopes/{id}:
- *   get:
- *     summary: Obtener un sobre por ID
- *     tags: [Envelopes]
+ *     summary: Obtener todas las transacciones de un sobre
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: envelopeId
  *         schema:
  *           type: string
  *         required: true
  *         description: ID del sobre
  *     responses:
  *       200:
- *         description: Sobre obtenido exitosamente
+ *         description: Lista de transacciones obtenida exitosamente
  *       404:
  *         description: Sobre no encontrado
  */
-router.get('/api/envelopes/:id', protect, getEnvelopeById);
+router.get('/envelope/:envelopeId', protect, transactionController.getEnvelopeTransactions);
 
 /**
  * @swagger
- * /api/envelopes/{id}:
- *   put:
- *     summary: Actualizar un sobre por ID
- *     tags: [Envelopes]
+ * /api/transactions/{id}:
+ *   get:
+ *     summary: Obtener una transacción por ID
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -90,7 +76,30 @@ router.get('/api/envelopes/:id', protect, getEnvelopeById);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del sobre
+ *         description: ID de la transacción
+ *     responses:
+ *       200:
+ *         description: Transacción obtenida exitosamente
+ *       404:
+ *         description: Transacción no encontrada
+ */
+router.get('/:id', protect, transactionController.getTransactionById);
+
+/**
+ * @swagger
+ * /api/transactions/{id}:
+ *   put:
+ *     summary: Actualizar una transacción por ID
+ *     tags: [Transactions]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la transacción
  *     requestBody:
  *       required: true
  *       content:
@@ -98,26 +107,26 @@ router.get('/api/envelopes/:id', protect, getEnvelopeById);
  *           schema:
  *             type: object
  *             properties:
- *               name:
- *                 type: string
- *               budget:
+ *               amount:
  *                 type: number
+ *               description:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Sobre actualizado exitosamente
+ *         description: Transacción actualizada exitosamente
  *       400:
  *         description: Error en la solicitud
  *       404:
- *         description: Sobre no encontrado
+ *         description: Transacción no encontrada
  */
-router.put('/api/envelopes/:id', protect, updateEnvelope);
+router.put('/:id', protect, transactionController.updateTransaction);
 
 /**
  * @swagger
- * /api/envelopes/{id}:
+ * /api/transactions/{id}:
  *   delete:
- *     summary: Eliminar un sobre por ID
- *     tags: [Envelopes]
+ *     summary: Eliminar una transacción por ID
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -126,13 +135,13 @@ router.put('/api/envelopes/:id', protect, updateEnvelope);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del sobre
+ *         description: ID de la transacción
  *     responses:
  *       200:
- *         description: Sobre eliminado exitosamente
+ *         description: Transacción eliminada exitosamente
  *       404:
- *         description: Sobre no encontrado
+ *         description: Transacción no encontrada
  */
-router.delete('/api/envelopes/:id', protect, deleteEnvelope);
+router.delete('/:id', protect, transactionController.deleteTransaction);
 
 module.exports = router;
