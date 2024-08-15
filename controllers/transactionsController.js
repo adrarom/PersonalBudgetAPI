@@ -1,5 +1,5 @@
-const Transaction = require('../models/Transaction');
-const Envelope = require('../models/Envelope');
+const Transaction = require('../models/transaction');
+const Envelope = require('../models/envelope');
 
 exports.createTransaction = async (req, res) => {
     try {

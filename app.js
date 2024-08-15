@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const connectDB = require('./config/database');
 const dotenv = require('dotenv');
+const { swaggerUi, specs } = require('./swagger');
 
 dotenv.config();
 
@@ -22,8 +23,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
+
 app.use('/api/envelopes', require('./routes/envelopeRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/transactions', require('./routes/transactionsRoutes'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

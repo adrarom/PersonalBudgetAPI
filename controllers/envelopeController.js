@@ -1,6 +1,6 @@
-const Envelope = require('../models/Envelope');
-const User = require('../models/User');
-const Transaction = require('../models/Transaction');
+const Envelope = require('../models/envelope');
+const User = require('../models/user');
+const Transaction = require('../models/transaction');
 
 exports.createEnvelope = async (req, res) => {
     try {
