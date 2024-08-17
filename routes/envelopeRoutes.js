@@ -35,7 +35,7 @@ const { protect } = require('../middleware/authMiddleware');
  *       400:
  *         description: Error en la solicitud
  */
-router.post('/api/envelopes', protect, createEnvelope);
+router.post('/', protect, createEnvelope);
 
 /**
  * @swagger
@@ -51,7 +51,7 @@ router.post('/api/envelopes', protect, createEnvelope);
  *       401:
  *         description: No autorizado
  */
-router.get('/api/envelopes', protect, getUserEnvelopes);
+router.get('/', protect, getUserEnvelopes);
 
 /**
  * @swagger
@@ -74,7 +74,7 @@ router.get('/api/envelopes', protect, getUserEnvelopes);
  *       404:
  *         description: Sobre no encontrado
  */
-router.get('/api/envelopes/:id', protect, getEnvelopeById);
+router.get('/:id', protect, getEnvelopeById);
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ router.get('/api/envelopes/:id', protect, getEnvelopeById);
  *       404:
  *         description: Sobre no encontrado
  */
-router.put('/api/envelopes/:id', protect, updateEnvelope);
+router.put('/:id', protect, updateEnvelope);
 
 /**
  * @swagger
@@ -133,6 +133,6 @@ router.put('/api/envelopes/:id', protect, updateEnvelope);
  *       404:
  *         description: Sobre no encontrado
  */
-router.delete('/api/envelopes/:id', protect, deleteEnvelope);
+router.delete('/:id', protect, deleteEnvelope);
 
 module.exports = router;

@@ -5,7 +5,6 @@ const password = process.env.MONGO_PASSWORD;
 
 const connectDB = async () => {
     try {
-        console.log(password);
         await mongoose.connect(`mongodb+srv://adrarom:${password}@budgetapidb.qe9d8he.mongodb.net/?retryWrites=true&w=majority&appName=BudgetAPIDB`);
         console.log('MongoDB Connected');
     } catch (err) {

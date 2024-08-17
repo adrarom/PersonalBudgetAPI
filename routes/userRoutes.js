@@ -23,7 +23,7 @@ const { protect } = require('../middleware/authMiddleware');
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               username:
  *                 type: string
  *               email:
  *                 type: string
