@@ -5,7 +5,7 @@
         "src": "front/package.json",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "dist"  // Directorio de salida generado por Vite
+          "distDir": "dist"
         }
       },
       {
@@ -16,11 +16,11 @@
     "routes": [
       {
         "src": "/api/(.*)",
-        "dest": "/app.js"  // Redirige todas las rutas API a `app.js`
+        "dest": "/app.js"
       },
       {
         "src": "/(.*)",
-        "dest": "/dist/$1"  // Redirige todas las demás solicitudes a archivos estáticos en `dist`
+        "dest": "/dist/$1"
       }
     ]
   }
