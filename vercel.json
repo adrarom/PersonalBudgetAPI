@@ -1,0 +1,16 @@
+{
+    "projects": [
+      {
+        "src": "front/package.json",
+        "use": "@vercel/static-build",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      },
+      {
+        "src": "package.json",
+        "use": "@vercel/node",
+        "entrypoint": "app.js"
+      }
+    ]
+  }
+  
