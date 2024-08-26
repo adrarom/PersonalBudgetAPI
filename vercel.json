@@ -1,15 +1,29 @@
 {
-    "projects": [
+    "version": 2,
+    "builds": [
       {
         "src": "front/package.json",
         "use": "@vercel/static-build",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
+        "config": {
+          "distDir": "dist"
+        }
       },
       {
         "src": "package.json",
         "use": "@vercel/node",
-        "entrypoint": "app.js"
+        "config": {
+          "entrypoint": "app.js"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "package.json"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "front/dist/$1"
       }
     ]
   }
