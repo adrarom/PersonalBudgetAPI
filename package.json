@@ -20,5 +20,8 @@
     "pug": "2.0.0-beta11",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/vue": "^2.0.0"
   }
 }
